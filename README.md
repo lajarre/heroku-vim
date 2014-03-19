@@ -3,6 +3,8 @@ heroku-vim
 
 Installs vim in a dyno and starts a bash session.
 
+Changes PATH and EDITOR env vars.
+
 ## Install
 
 ```
