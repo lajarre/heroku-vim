@@ -22,7 +22,9 @@ curl https://s3.amazonaws.com/heroku-vim/vim-7.3.tar.gz --location --silent | ta
 export PATH=$PATH:/app/vim/bin
 export EDITOR=vim
 set -o vi
+cat > ~/.inputrc << EOF
 #{inputrc}
+EOF
 bash
     CMD
   end
