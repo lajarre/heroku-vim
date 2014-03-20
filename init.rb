@@ -15,11 +15,13 @@ class Heroku::Command::Vim < Heroku::Command::Run
   protected
 
   def vim_cmd
+    inputrc = File.open("/Users/alex/.inputrc", "r").read
     <<-CMD
 mkdir vim
 curl https://s3.amazonaws.com/heroku-vim/vim-7.3.tar.gz --location --silent | tar xz -C vim
 export PATH=$PATH:/app/vim/bin
 export EDITOR=vim
+#{inputrc}
 bash
     CMD
   end
