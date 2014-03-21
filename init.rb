@@ -15,7 +15,11 @@ class Heroku::Command::Vim < Heroku::Command::Run
   protected
 
   def vim_cmd
-    inputrc = File.open(File.expand_path("~/.inputrc"), "r").read
+    if File.file?(File.expand_path("~/.inputrc_heroku"))
+      inputrc = File.open(File.expand_path("~/.inputrc_heroku"), "r").read
+    else
+      inputrc = File.open(File.expand_path("~/.inputrc"), "r").read
+    end
     <<-CMD
 mkdir vim
 curl https://s3.amazonaws.com/heroku-vim/vim-7.3.tar.gz --location --silent | tar xz -C vim
