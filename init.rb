@@ -21,9 +21,13 @@ class Heroku::Command::Vim < Heroku::Command::Run
       inputrc = File.open(File.expand_path("~/.inputrc"), "r").read
     end
     <<-CMD
-mkdir vim
-curl https://s3.amazonaws.com/heroku-vim/vim-7.3.tar.gz --location --silent | tar xz -C vim
-export PATH=$PATH:/app/vim/bin
+mkdir $HOME/vim
+cd $HOME/vim
+# Staically linked vim version compiled from https://github.com/ericpruitt/static-vim
+# Compiled on Jul 20 2017
+curl 'https://s3.amazonaws.com/bengoa/vim-static.tar.gz' | tar -xz
+export VIMRUNTIME="$HOME/vim/runtime"
+export PATH="$HOME/vim:$PATH"
 export EDITOR=vim
 set -o vi
 cat > ~/.inputrc << EOF
